@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "oureach-ai/server.js",
+      "src": "server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "oureach-ai/server.js"
+      "dest": "server.js"
     }
   ]
 }

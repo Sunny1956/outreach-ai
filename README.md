@@ -1,126 +1,88 @@
-# 🚀 AI-Powered Outreach Desk
-**Semester 7 Major Project — Full-Stack Web Engineering / Intelligent Systems / Applied AI & NLP**
+# Oureach.ai — multi-channel outreach dashboard
 
-> Manual-First Execution with Intelligent Machine-Assisted Text Personalization *(Aria-Bot Pattern)*
+A college project: a single login where you connect your email plus your
+Instagram, Facebook, Twitter/X and LinkedIn accounts, upload a list of leads,
+write one message, and send it out across every connected channel — with a
+dashboard that logs what was sent, to whom, on which platform, and whether it
+succeeded.
 
----
+## What actually works out of the box
 
-## 📐 Architecture
-- **Pattern**: Decoupled RESTful (Frontend ↔ Backend API)
-- **Database**: PostgreSQL (relational, multi-tenant safe)
-- **Auth**: JWT-based secure session handling
+- **Sign up / log in** — real accounts, passwords hashed with bcrypt, sessions via cookies.
+- **Email sending — genuinely real.** Connect any SMTP account (e.g. Gmail
+  with an [app password](https://myaccount.google.com/apppasswords)) and
+  campaigns really send email through it via Nodemailer.
+- **Instagram / Facebook / Twitter / LinkedIn — simulated by default.**
+  Actually posting/DM'ing on these platforms requires you to register a
+  developer app with each one and get it approved for messaging permissions,
+  which can take days to weeks and can't be done inside a project by itself.
+  So `DEMO_MODE=true` (the default, in `.env`) simulates realistic sends —
+  a short delay and a ~92% success rate — so the whole product demos
+  end-to-end today. Flip `DEMO_MODE=false` and fill in the API keys in `.env`
+  once you've registered and been approved for each platform's API
+  (see `src/social.js` for exactly which endpoint each one calls).
+- **Lead lists** — upload a CSV (`sample_leads.csv` included) or add leads
+  one at a time. Columns: `name, email, instagram, facebook, twitter, linkedin`.
+- **Campaigns** — pick a channel, write a message (use `{{name}}` to
+  personalize), select leads, launch. Every send is logged.
+- **Per-user dashboard** — total leads/campaigns/sent/failed, a per-channel
+  breakdown, and a recent-activity feed. Each user only sees their own data.
+- **About / Founder page** — company page for Oureach.ai with your resume
+  and photo as founder & CEO.
 
----
+## Running it locally
 
-## 🛠️ Tech Stack
-
-### Frontend
-| Technology | Purpose |
-|---|---|
-| React.js v18+ (TypeScript) | UI Framework |
-| Tailwind CSS | Glassmorphic Styling |
-| Context API + React Router v6 | State & Routing |
-| Recharts / Chart.js | Analytics Visualizations |
-
-### Backend
-| Technology | Purpose |
-|---|---|
-| Python 3.10+ + FastAPI | Async REST API |
-| SQLAlchemy | ORM layer |
-| PostgreSQL | Relational Database |
-| Alembic | DB Migrations |
-| JWT (python-jose) | Authentication |
-| OpenAI / Groq API | AI Message Synthesis |
-
----
-
-## ✨ Key Features
-1. **Product Profile Engine** — Curated product value propositions with taglines & target personas
-2. **Contextual Lead Hub** — Flexible lead manager with platform-specific nodes (Email, LinkedIn, X, WhatsApp)
-3. **Dynamic Tone & Format Workspace** — AI-driven message generation (Warm / Direct / Formal tones)
-4. **Performance CRM Dashboard** — Conversion funnel: New → Drafted → Sent → Replied → Converted
-
----
-
-## 📊 Lead Scoring Formula
-```
-R_score = (α₁ × C_length) + (α₂ × T_days) − (α₃ × S_weight)
-```
-- `C_length` — Character depth of factual lead notes
-- `T_days` — Total duration since record creation or last action
-- `S_weight` — Structural deduction multiplier based on funnel progress
-- `α₁, α₂, α₃` — Priority weights configured dynamically in user preferences
-
----
-
-## 📅 Implementation Roadmap
-| Phase | Focus | Weeks |
-|---|---|---|
-| 1 | Database Engineering & Schema Design | 1–3 |
-| 2 | FastAPI REST Architecture Development | 4–6 |
-| 3 | AI Message Synthesis & Generation Layer | 7–9 |
-| 4 | Responsive Glassmorphic Frontend | 10–12 |
-| 5 | Analytics, QA & Testing | 13–14 |
-
----
-
-## 🚦 Quick Start
-
-### Prerequisites
-- Node.js 18+
-- Python 3.10+
-- PostgreSQL 14+
-
-### Backend Setup
 ```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate         # Windows
-pip install -r requirements.txt
-cp .env.example .env          # Fill in your credentials
-alembic upgrade head
-uvicorn app.main:app --reload
-```
-
-### Frontend Setup
-```bash
-cd frontend
 npm install
-cp .env.example .env.local    # Fill in your API base URL
-npm run dev
+cp .env.example .env      # then edit .env if you want (SESSION_SECRET etc.)
+npm start
 ```
 
-### Full Stack (Docker)
-```bash
-docker-compose up --build
+Open **http://localhost:3000**.
+
+## Putting it online (free options for a college submission)
+
+This is a plain Node/Express app with a small JSON file as its database, so
+it deploys almost anywhere that runs Node:
+
+**Render.com (recommended, free tier)**
+1. Push this folder to a GitHub repo.
+2. On Render: New → Web Service → connect the repo.
+3. Build command: `npm install`. Start command: `npm start`.
+4. Add environment variables from `.env.example` (at least `SESSION_SECRET`).
+5. Deploy — Render gives you a public URL like `oureach-ai.onrender.com`.
+
+**Railway.app** works the same way (New Project → Deploy from GitHub → set
+env vars → it detects `npm start` automatically).
+
+**Replit** also works if you'd rather not use GitHub: import this folder,
+it auto-detects Node, add the `.env` values in the Secrets tab, hit Run.
+
+> Note: the JSON-file database in `data/db.json` resets if the platform's
+> free tier restarts/redeploys the container. That's fine for a demo/viva.
+> For anything long-lived, swap `src/db.js` for a real database
+> (e.g. Postgres) — the rest of the app doesn't need to change, since it
+> only talks to `db.js`'s `load()`/`save()` functions.
+
+## Project structure
+
+```
+server.js              Express app + all API routes
+src/db.js               JSON-file data layer (users, accounts, leads, campaigns, logs)
+src/auth.js              login-required middleware
+src/mailer.js            real SMTP sending via Nodemailer
+src/social.js            Instagram/Facebook/Twitter/LinkedIn sender (demo + real-API scaffolding)
+public/index.html        login / sign up
+public/dashboard.html     per-user dashboard, connect accounts, leads, campaigns
+public/about.html         company + founder page
+public/css/style.css      shared design system
 ```
 
----
+## Extending it for a stronger submission
 
-## 📁 Project Structure
-```
-outreach-desk/
-├── backend/          # FastAPI application
-│   ├── app/
-│   │   ├── models/   # SQLAlchemy ORM models
-│   │   ├── schemas/  # Pydantic request/response schemas
-│   │   ├── routers/  # API route handlers
-│   │   ├── services/ # Business logic & AI service
-│   │   └── utils/    # JWT, helpers
-│   ├── tests/        # Pytest test suite
-│   └── alembic/      # DB migration scripts
-├── frontend/         # React + TypeScript SPA
-│   └── src/
-│       ├── components/
-│       ├── pages/
-│       ├── context/
-│       ├── hooks/
-│       └── services/
-└── docker-compose.yml
-```
-
----
-
-## 👨‍💻 Author
-Major Project — Semester 7  
-*AI-Powered Outreach Desk Blueprint*
+- Swap `src/db.js` for Postgres/MongoDB and mention it in your report as the
+  production-readiness step.
+- Add real OAuth "Connect with Instagram/LinkedIn" buttons instead of typing
+  a handle — needs a registered developer app per platform.
+- Add open/click tracking for email (a tracking pixel + link redirects).
+- Add scheduled sends with a job queue (e.g. `node-cron`).
