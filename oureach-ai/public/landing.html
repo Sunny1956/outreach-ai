@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Oureach.ai — Multi-channel outreach, simplified</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Oureach.ai unifies email, Instagram, Facebook, Twitter and LinkedIn outreach into one smart dashboard. Upload leads, write once, send everywhere.">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/landing.css">
+</head>
+<body class="landing-body">
+
+<!-- ===== NAV ===== -->
+<nav class="lp-nav" id="lpNav">
+  <div class="lp-nav-inner">
+    <a href="/" class="brand"><span class="dot"></span>oureach<span class="mono">.ai</span></a>
+    <div class="lp-nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="/about.html">About</a>
+      <a href="/login.html" class="btn btn-ghost btn-sm">Log in</a>
+      <a href="/login.html#signup" class="btn btn-primary btn-sm">Get started free</a>
+    </div>
+    <button class="lp-hamburger" id="lpHamburger" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="lp-mobile-nav hidden" id="lpMobileNav">
+    <a href="#features" onclick="toggleMobileNav()">Features</a>
+    <a href="#how-it-works" onclick="toggleMobileNav()">How it works</a>
+    <a href="/about.html">About</a>
+    <a href="/login.html" class="btn btn-ghost btn-sm">Log in</a>
+    <a href="/login.html#signup" class="btn btn-primary btn-sm">Get started free</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="lp-hero">
+  <div class="lp-hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="lp-hero-inner">
+    <div class="lp-hero-text">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Multi-channel outreach platform
+      </div>
+      <h1 class="hero-h1">
+        One dashboard.<br>
+        <span class="gradient-text">Every channel.</span><br>
+        Zero friction.
+      </h1>
+      <p class="hero-sub">
+        Connect email, Instagram, Facebook, Twitter and LinkedIn once.
+        Upload a lead list, write your message, and Oureach.ai sends to
+        everyone — tracking every result on a single live dashboard.
+      </p>
+      <div class="hero-cta-row">
+        <a href="/login.html#signup" class="btn btn-primary btn-lg" id="heroGetStarted">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Start for free
+        </a>
+        <a href="#features" class="btn btn-ghost btn-lg" id="heroSeeFeatures">
+          See features
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l10-10M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          No credit card needed
+        </span>
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Email verified accounts
+        </span>
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Works in demo mode instantly
+        </span>
+      </div>
+    </div>
+
+    <div class="lp-hero-visual">
+      <div class="hero-dashboard-preview">
+        <div class="preview-topbar">
+          <div class="preview-dot r"></div>
+          <div class="preview-dot y"></div>
+          <div class="preview-dot g"></div>
+          <span class="preview-url">oureach.ai/dashboard</span>
+        </div>
+        <div class="preview-body">
+          <div class="preview-stat-row">
+            <div class="preview-stat">
+              <div class="ps-label">Leads</div>
+              <div class="ps-num">248</div>
+            </div>
+            <div class="preview-stat">
+              <div class="ps-label">Campaigns</div>
+              <div class="ps-num">12</div>
+            </div>
+            <div class="preview-stat">
+              <div class="ps-label">Sent</div>
+              <div class="ps-num green">1,840</div>
+            </div>
+            <div class="preview-stat">
+              <div class="ps-label">Failed</div>
+              <div class="ps-num amber">7</div>
+            </div>
+          </div>
+          <div class="preview-channels">
+            <div class="preview-channel connected">
+              <span class="pc-icon email-icon">✉</span>
+              <span class="pc-name">Email</span>
+              <span class="pc-badge">Connected</span>
+            </div>
+            <div class="preview-channel connected">
+              <span class="pc-icon ig-icon">ig</span>
+              <span class="pc-name">Instagram</span>
+              <span class="pc-badge">Connected</span>
+            </div>
+            <div class="preview-channel">
+              <span class="pc-icon fb-icon">f</span>
+              <span class="pc-name">Facebook</span>
+              <span class="pc-badge grey">–</span>
+            </div>
+            <div class="preview-channel connected">
+              <span class="pc-icon tw-icon">𝕏</span>
+              <span class="pc-name">Twitter</span>
+              <span class="pc-badge">Connected</span>
+            </div>
+            <div class="preview-channel">
+              <span class="pc-icon li-icon">in</span>
+              <span class="pc-name">LinkedIn</span>
+              <span class="pc-badge grey">–</span>
+            </div>
+          </div>
+          <div class="preview-activity">
+            <div class="preview-act-title">Recent activity</div>
+            <div class="preview-act-item">
+              <span class="act-dot green-dot"></span>
+              <span class="act-text">July Launch → Priya Sharma <b class="act-sent">sent</b></span>
+            </div>
+            <div class="preview-act-item">
+              <span class="act-dot green-dot"></span>
+              <span class="act-text">July Launch → Rahul Mehta <b class="act-sent">sent</b></span>
+            </div>
+            <div class="preview-act-item">
+              <span class="act-dot amber-dot"></span>
+              <span class="act-text">IG Promo → Alex Chen <b class="act-fail">failed</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Floating notification badge -->
+      <div class="preview-notif" id="previewNotif">
+        <span class="notif-dot"></span>
+        Campaign launched · 3 sent, 0 failed
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS STRIP ===== -->
+<div class="lp-stats-strip">
+  <div class="lp-stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Channels in one place</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">CSV</div>
+      <div class="stat-label">Bulk lead import</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">OTP</div>
+      <div class="stat-label">Email-verified accounts</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">1-click</div>
+      <div class="stat-label">Campaign launch</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FEATURES ===== -->
+<section class="lp-section" id="features">
+  <div class="lp-section-inner">
+    <div class="section-eyebrow">What you get</div>
+    <h2 class="section-h2">Everything for multi-channel outreach</h2>
+    <p class="section-sub">Built for founders, creators, and marketers who don't want five separate tools.</p>
+
+    <div class="features-grid">
+
+      <div class="feature-card" data-delay="0">
+        <div class="fc-icon fc-amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+        </div>
+        <h3>Real email delivery</h3>
+        <p>Connect any Gmail or SMTP account with an app password. Oureach.ai sends real emails directly from your account so replies land in your inbox, not a shared platform.</p>
+        <div class="fc-tag">SMTP · Works with Gmail, Outlook, custom</div>
+      </div>
+
+      <div class="feature-card" data-delay="100">
+        <div class="fc-icon fc-pink">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </div>
+        <h3>Social platform reach</h3>
+        <p>Instagram, Facebook, Twitter/X, and LinkedIn — all in one campaign. Map leads to their social handles and send personalised DMs or posts from a single compose window.</p>
+        <div class="fc-tag">Demo mode ships out of the box</div>
+      </div>
+
+      <div class="feature-card" data-delay="200">
+        <div class="fc-icon fc-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Smart lead management</h3>
+        <p>Import hundreds of leads from a CSV with one click, or add them manually. Search, filter, and browse leads instantly. Include only the leads you want in each campaign.</p>
+        <div class="fc-tag">CSV import · Manual add · Live search</div>
+      </div>
+
+      <div class="feature-card" data-delay="300">
+        <div class="fc-icon fc-blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Live campaign analytics</h3>
+        <p>See every send, failure, and result the moment it happens. The activity feed updates in real time — per lead, per channel, per campaign — so you always know what's landing.</p>
+        <div class="fc-tag">Per-lead result tracking</div>
+      </div>
+
+      <div class="feature-card" data-delay="400">
+        <div class="fc-icon fc-amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c1.1 0 2-.9 2-2H10c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+        </div>
+        <h3>In-app notifications</h3>
+        <p>A notification bell keeps you updated without interrupting your flow. Get alerts for successful sends, failures, newly imported leads, and connected accounts — all in a tidy dropdown.</p>
+        <div class="fc-tag">Real-time · Unread count badge</div>
+      </div>
+
+      <div class="feature-card" data-delay="500">
+        <div class="fc-icon fc-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>OTP email verification</h3>
+        <p>Every new account is verified with a 6-digit code sent to your inbox. Keeps the platform secure, spam-free, and trusted. Works in demo mode too — the code is shown on screen.</p>
+        <div class="fc-tag">6-digit OTP · 10-min expiry · Rate limited</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="lp-section lp-alt-bg" id="how-it-works">
+  <div class="lp-section-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-h2">From signup to first send in minutes</h2>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Create your account</h3>
+        <p>Sign up with your email and verify with a 6-digit OTP code. Your account is ready immediately after verification.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Connect your channels</h3>
+        <p>Add your Gmail (or any SMTP) with an app password for real email sends. Social platforms work in demo mode instantly.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Import your leads</h3>
+        <p>Upload a CSV or add leads manually. Include name, email, and social handles. Search and filter your list at any time.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>Launch your campaign</h3>
+        <p>Write your message, use {{name}} to personalise, pick your leads, and hit launch. Watch results come in on the live dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHANNEL STRIP ===== -->
+<section class="lp-section">
+  <div class="lp-section-inner lp-channels-section">
+    <div class="lp-channels-text">
+      <div class="section-eyebrow">Channels</div>
+      <h2 class="section-h2">Five platforms, one dashboard</h2>
+      <p class="section-sub">Stop switching between five apps to track your outreach. Oureach.ai puts every channel in one place so you can focus on writing great messages, not managing tabs.</p>
+      <a href="/login.html#signup" class="btn btn-primary" id="channelCTA">Connect your first channel →</a>
+    </div>
+    <div class="lp-channels-icons">
+      <div class="channel-pill email-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+        Email
+      </div>
+      <div class="channel-pill ig-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        Instagram
+      </div>
+      <div class="channel-pill fb-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.15.32-1.93 1.97-1.93H16.5V1.08C16.19 1.04 15.14 1 13.92 1 11.4 1 9.66 2.54 9.66 5.31V9H7v4h2.66v9H13z"/></svg>
+        Facebook
+      </div>
+      <div class="channel-pill tw-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 3H21l-6.5 7.4L22 21h-6.4l-5-6.5L4.7 21H2.6l6.9-7.9L2 3h6.5l4.5 6z"/></svg>
+        Twitter / X
+      </div>
+      <div class="channel-pill li-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.78 0-2.05 1.39-2.05 2.82V21H9z"/></svg>
+        LinkedIn
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<section class="lp-cta-banner">
+  <div class="cta-banner-inner">
+    <div class="cta-orb cta-orb-1"></div>
+    <div class="cta-orb cta-orb-2"></div>
+    <h2>Ready to unify your outreach?</h2>
+    <p>Sign up in 30 seconds. Verify your email with OTP. Start reaching leads on every channel.</p>
+    <div class="cta-btn-row">
+      <a href="/login.html#signup" class="btn btn-primary btn-lg" id="ctaBannerBtn">Create free account</a>
+      <a href="/login.html" class="btn btn-ghost btn-lg" id="ctaLoginBtn">Log in</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="lp-footer">
+  <div class="lp-footer-inner">
+    <div class="lp-footer-brand">
+      <div class="brand"><span class="dot"></span>oureach<span class="mono">.ai</span></div>
+      <p>A multi-channel outreach platform built as a college project.<br>Connect email and social — track everything in one place.</p>
+    </div>
+    <div class="lp-footer-links">
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="/dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="/about.html">About &amp; Founder</a>
+        <a href="/login.html">Log in</a>
+        <a href="/login.html#signup">Sign up</a>
+      </div>
+    </div>
+  </div>
+  <div class="lp-footer-bottom">
+    Oureach.ai — built by Parv Patel · College Minor Project · 2026
+  </div>
+</footer>
+
+<script>
+// Sticky nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('lpNav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Mobile nav toggle
+function toggleMobileNav() {
+  document.getElementById('lpMobileNav').classList.toggle('hidden');
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Feature cards entrance animation on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.feature-card, .step-card').forEach(el => observer.observe(el));
+
+// Floating notification bounce
+setTimeout(() => {
+  document.getElementById('previewNotif').classList.add('notif-show');
+}, 1200);
+
+// If already logged in, go to dashboard
+fetch('/api/me').then(r => r.ok ? (window.location.href = '/dashboard.html') : null).catch(() => {});
+
+// Handle #signup hash on login page links
+document.querySelectorAll('a[href="/login.html#signup"]').forEach(a => {
+  a.addEventListener('click', () => {
+    sessionStorage.setItem('openTab', 'signup');
+  });
+});
+</script>
+</body>
+</html>

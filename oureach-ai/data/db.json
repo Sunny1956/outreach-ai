@@ -1,0 +1,207 @@
+{
+  "users": [
+    {
+      "id": "1785091279769",
+      "name": "Test User",
+      "email": "test@example.com",
+      "passwordHash": "$2a$10$ebLdItetkInuJpKZMUmcu.Us2lLYniRfuRqQ6NhNcyHqmi7Jltmuy",
+      "createdAt": "2026-07-26T18:48:45.346Z"
+    },
+    {
+      "id": "1785127779503",
+      "name": "user",
+      "email": "user@gmail.com",
+      "passwordHash": "$2a$10$zx1fmeZFpN0Nh.47C451l.PuLHnwPV2T9dOHXZsK7yzNKIgIVuOUC",
+      "createdAt": "2026-07-27T06:13:19.860Z"
+    },
+    {
+      "id": "1785306429339",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "passwordHash": "$2a$10$hUC8tkuS3KVWqYi.vOP2ju8E59pgGKT9Nvf6mWUkSvF0n9CHKYQuu",
+      "createdAt": "2026-07-29T06:28:38.438Z"
+    },
+    {
+      "id": "1785563834786",
+      "name": "Test Founder",
+      "email": "testuser_1785563850865@example.com",
+      "passwordHash": "$2a$10$hEkM3QWekzNCbKu30ZT5R.tjT8/sMqr/ooTEKjkgt4Sy2WcmkSwMe",
+      "isVerified": true,
+      "createdAt": "2026-08-01T05:57:31.132Z"
+    },
+    {
+      "id": "1785902739729",
+      "name": "test",
+      "email": "patelsani9342@gmail.com",
+      "passwordHash": "$2a$10$G2l9wqUsxR3ZChsh0wotIOqvb2d26fZNjXCtg9cXwmVUArrw0EuOi",
+      "isVerified": true,
+      "createdAt": "2026-08-05T04:08:24.456Z"
+    },
+    {
+      "id": "1786418550195",
+      "name": "test",
+      "email": "test@gmail.com",
+      "passwordHash": "$2a$10$hLfaCqXCq/RVQ1Qbrb32S.Mi.Ze6Wq7ZchHmC1E3uCbfS1jShGPYq",
+      "isVerified": true,
+      "createdAt": "2026-08-11T03:23:31.230Z"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "1785091279770",
+      "userId": "1785091279769",
+      "platform": "instagram",
+      "handle": "@testbrand",
+      "smtpHost": null,
+      "smtpPort": null,
+      "smtpUser": null,
+      "smtpPass": null,
+      "connectedAt": "2026-07-26T18:55:25.939Z"
+    },
+    {
+      "id": "1785563834787",
+      "userId": "1785563834786",
+      "platform": "instagram",
+      "handle": "@testbrand_ig",
+      "smtpHost": null,
+      "smtpPort": null,
+      "smtpUser": null,
+      "smtpPass": null,
+      "connectedAt": "2026-08-01T05:57:31.153Z"
+    },
+    {
+      "id": "1785902739733",
+      "userId": "1785902739729",
+      "platform": "instagram",
+      "handle": "sunnypatel_2134",
+      "smtpHost": null,
+      "smtpPort": null,
+      "smtpUser": null,
+      "smtpPass": null,
+      "connectedAt": "2026-08-05T04:14:19.308Z"
+    }
+  ],
+  "leads": [
+    {
+      "id": "1785091279771",
+      "userId": "1785091279769",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "instagram": "@john_insta",
+      "facebook": "",
+      "twitter": "",
+      "linkedin": "",
+      "source": "manual",
+      "createdAt": "2026-07-26T18:56:04.479Z"
+    },
+    {
+      "id": "1785563834788",
+      "userId": "1785563834786",
+      "name": "Alex Johnson",
+      "email": "alex@example.com",
+      "instagram": "@alex_j",
+      "facebook": "",
+      "twitter": "",
+      "linkedin": "linkedin.com/in/alexj",
+      "source": "manual",
+      "createdAt": "2026-08-01T05:57:31.160Z"
+    },
+    {
+      "id": "1785902739730",
+      "userId": "1785902739729",
+      "name": "parv patel",
+      "email": "patelsani9342@gmai.com",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "linkedin": "",
+      "source": "manual",
+      "createdAt": "2026-08-05T04:10:02.680Z"
+    },
+    {
+      "id": "1785902739731",
+      "userId": "1785902739729",
+      "name": "sunny",
+      "email": "sunny234@gmail.com",
+      "instagram": "suny_patel2134",
+      "facebook": "",
+      "twitter": "",
+      "linkedin": "",
+      "source": "manual",
+      "createdAt": "2026-08-05T04:12:44.150Z"
+    }
+  ],
+  "campaigns": [
+    {
+      "id": "1785091279772",
+      "userId": "1785091279769",
+      "name": "Test Instagram Campaign",
+      "channel": "instagram",
+      "subject": "",
+      "message": "Hi {{name}}, checking in on Instagram!",
+      "leadIds": [
+        "1785091279771"
+      ],
+      "status": "sent",
+      "createdAt": "2026-07-26T18:57:32.706Z",
+      "launchedAt": "2026-07-26T18:58:13.422Z"
+    },
+    {
+      "id": "1785563834789",
+      "userId": "1785563834786",
+      "name": "Q3 Product Outreach",
+      "channel": "instagram",
+      "subject": "",
+      "message": "Hey {{name}}, check out our awesome new platform!",
+      "leadIds": [
+        "1785563834788"
+      ],
+      "status": "sent",
+      "createdAt": "2026-08-01T05:57:31.171Z",
+      "launchedAt": "2026-08-01T05:57:31.664Z"
+    },
+    {
+      "id": "1785902739732",
+      "userId": "1785902739729",
+      "name": "august",
+      "channel": "instagram",
+      "subject": "",
+      "message": "personal finance",
+      "leadIds": [
+        "1785902739730"
+      ],
+      "status": "sent",
+      "createdAt": "2026-08-05T04:13:38.714Z",
+      "launchedAt": "2026-08-05T04:20:53.783Z"
+    }
+  ],
+  "logs": [
+    {
+      "id": "1785091279773",
+      "campaignId": "1785091279772",
+      "leadId": "1785091279771",
+      "platform": "instagram",
+      "success": true,
+      "detail": "Simulated instagram message delivered to @john_insta",
+      "sentAt": "2026-07-26T18:58:13.422Z"
+    },
+    {
+      "id": "1785563834790",
+      "campaignId": "1785563834789",
+      "leadId": "1785563834788",
+      "platform": "instagram",
+      "success": true,
+      "detail": "Simulated instagram message delivered to @alex_j",
+      "sentAt": "2026-08-01T05:57:31.664Z"
+    },
+    {
+      "id": "1785902739734",
+      "campaignId": "1785902739732",
+      "leadId": "1785902739730",
+      "platform": "instagram",
+      "success": false,
+      "detail": "Lead has no instagram handle on file.",
+      "sentAt": "2026-08-05T04:20:53.783Z"
+    }
+  ]
+}
