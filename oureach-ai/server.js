@@ -456,9 +456,14 @@ app.get('/api/dashboard/stats', requireLogin, (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`\n🚀 Oureach.ai running at http://localhost:${PORT}`);
-  console.log(`📧 OTP Emails: ${process.env.SYSTEM_SMTP_USER ? 'LIVE (via ' + process.env.SYSTEM_SMTP_USER + ')' : 'DEMO (OTPs logged to console)'}`);
-  console.log(`🌐 DEMO_MODE=${social.DEMO_MODE} (social sends are ${social.DEMO_MODE ? 'simulated' : 'real'})`);
-  console.log(`\nPress Ctrl+C to stop.\n`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`\n🚀 Oureach.ai running at http://localhost:${PORT}`);
+    console.log(`📧 OTP Emails: ${process.env.SYSTEM_SMTP_USER ? 'LIVE (via ' + process.env.SYSTEM_SMTP_USER + ')' : 'DEMO (OTPs logged to console)'}`);
+    console.log(`🌐 DEMO_MODE=${social.DEMO_MODE} (social sends are ${social.DEMO_MODE ? 'simulated' : 'real'})`);
+    console.log(`\nPress Ctrl+C to stop.\n`);
+  });
+}
+
+module.exports = app;
+
