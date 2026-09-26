@@ -2,14 +2,27 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
+      "src": "api/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["public/**", "data/**"]
+      }
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
-    }
+    { "src": "/css/(.*)", "dest": "/public/css/$1" },
+    { "src": "/js/(.*)", "dest": "/public/js/$1" },
+    { "src": "/images/(.*)", "dest": "/public/images/$1" },
+    { "src": "/files/(.*)", "dest": "/public/files/$1" },
+    { "src": "/landing.html", "dest": "/public/landing.html" },
+    { "src": "/login.html", "dest": "/public/login.html" },
+    { "src": "/dashboard.html", "dest": "/public/dashboard.html" },
+    { "src": "/about.html", "dest": "/public/about.html" },
+    { "src": "/index.html", "dest": "/public/landing.html" },
+    { "src": "/", "dest": "/public/landing.html" },
+    { "src": "/login", "dest": "/public/login.html" },
+    { "src": "/dashboard", "dest": "/public/dashboard.html" },
+    { "src": "/about", "dest": "/public/about.html" },
+    { "src": "/api/(.*)", "dest": "api/index.js" }
   ]
 }
