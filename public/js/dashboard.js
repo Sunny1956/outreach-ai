@@ -168,7 +168,7 @@ let leadSearchDebounce = null;
 
 async function boot() {
   const me = await fetch('/api/me');
-  if (!me.ok) { window.location.href = '/login.html'; return; }
+  if (!me.ok) { window.location.href = '/'; return; }
   const user = await me.json();
   currentUserId = user.id;
   document.getElementById('userName').textContent = user.name;
@@ -445,7 +445,7 @@ async function launchCampaign(id) {
 // =====================================================
 async function logout() {
   await fetch('/api/auth/logout', { method: 'POST' });
-  window.location.href = '/login.html';
+  window.location.href = '/';
 }
 
 // Campaign channel toggle

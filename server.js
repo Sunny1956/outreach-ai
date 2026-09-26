@@ -31,14 +31,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'landing.html'));
 });
-// /login alias
+// Clean URL: /login
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
-// Backward compat: old /index.html link → /login.html
-app.get('/index.html', (req, res) => {
-  res.redirect(301, '/login.html');
+// Clean URL: /dashboard
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
+// Clean URL: /about
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
+// ---------- .HTML → CLEAN URL REDIRECTS (301 permanent) ----------
+app.get('/index.html',     (req, res) => res.redirect(301, '/'));
+app.get('/landing.html',   (req, res) => res.redirect(301, '/'));
+app.get('/login.html',     (req, res) => res.redirect(301, '/login'));
+app.get('/dashboard.html', (req, res) => res.redirect(301, '/dashboard'));
+app.get('/about.html',     (req, res) => res.redirect(301, '/about'));
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 

@@ -11,7 +11,7 @@
 
 <div class="auth-shell">
   <div class="auth-hero">
-    <a href="/" class="brand" style="text-decoration:none;"><span class="dot"></span>oureach<span class="mono">.ai</span></a>
+    <a href="/" class="brand"><span class="dot"></span>oureach<span class="mono">.ai</span></a>
 
     <div class="pulse-wrap">
       <svg class="pulse-node" width="360" height="360" viewBox="0 0 360 360">
@@ -102,22 +102,22 @@
 
         <!-- Demo mode notice -->
         <div class="otp-demo-notice hidden" id="otpDemoNotice">
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+          <div class="otp-demo-head">
             <div>
-              <span>⚡</span> <strong>Demo Mode OTP Code:</strong> <span id="demoOtpValue" style="font-family:'JetBrains Mono'; font-size:1.1rem; color:var(--amber); font-weight:700;"></span>
+              <span>⚡</span> <strong>Demo Mode OTP Code:</strong> <span id="demoOtpValue" class="demo-otp-code"></span>
             </div>
-            <button class="btn btn-ghost btn-sm" id="autoFillBtn" style="padding:4px 10px; font-size:0.75rem; border-color:var(--amber); color:var(--amber);" onclick="autoFillOtp()">Auto-fill Code</button>
+            <button class="btn btn-ghost btn-sm btn-autofill" id="autoFillBtn" onclick="autoFillOtp()">Auto-fill Code</button>
           </div>
-          <div style="font-size:0.75rem; color:var(--slate-dim); margin-top:4px;">(To send real emails to your Gmail inbox, add SYSTEM_SMTP_USER &amp; PASS in .env)</div>
+          <div class="otp-demo-foot">(To send real emails to your Gmail inbox, add SYSTEM_SMTP_USER &amp; PASS in .env)</div>
         </div>
 
         <div class="otp-inputs" id="otpInputs">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp0" autocomplete="one-time-code">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp1">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp2">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp3">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp4">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp5">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp0" aria-label="Verification code digit 1" autocomplete="one-time-code">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp1" aria-label="Verification code digit 2">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp2" aria-label="Verification code digit 3">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp3" aria-label="Verification code digit 4">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp4" aria-label="Verification code digit 5">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp5" aria-label="Verification code digit 6">
         </div>
 
         <div class="otp-timer" id="otpTimer">Code expires in <span id="otpCountdown">10:00</span></div>
@@ -180,7 +180,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     });
     const body = await res.json();
     if (!res.ok) { errEl.textContent = body.error || 'Login failed'; return; }
-    window.location.href = '/dashboard.html';
+    window.location.href = '/dashboard';
   } catch (err) {
     errEl.textContent = 'Network error. Is the server running?';
   } finally {
@@ -353,7 +353,7 @@ async function submitOtp() {
     btn.style.background = 'var(--green)';
     btn.style.color = '#0a1a0a';
     clearInterval(otpTimerInterval);
-    setTimeout(() => { window.location.href = '/dashboard.html'; }, 700);
+    setTimeout(() => { window.location.href = '/dashboard'; }, 700);
   } catch (err) {
     errEl.textContent = 'Network error. Is the server running?';
   } finally {
@@ -401,7 +401,7 @@ function backToSignup() {
 }
 
 // If already logged in, skip straight to the dashboard
-fetch('/api/me').then(r => r.ok ? (window.location.href = '/dashboard.html') : null).catch(() => {});
+fetch('/api/me').then(r => r.ok ? (window.location.href = '/dashboard') : null).catch(() => {});
 </script>
 </body>
 </html>

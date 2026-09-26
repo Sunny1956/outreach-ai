@@ -102,23 +102,23 @@
 
         <!-- Demo mode notice -->
         <div class="otp-demo-notice hidden" id="otpDemoNotice">
-          <div style="display:flex; align-items:center; justify-space-between; gap:10px;">
+          <div class="otp-demo-head">
             <div>
-              <span>⚡</span> <strong>Demo Mode OTP Code:</strong> <span id="demoOtpValue" style="font-family:'JetBrains Mono'; font-size:1.1rem; color:var(--amber); font-weight:700;"></span>
+              <span>⚡</span> <strong>Demo Mode OTP Code:</strong> <span id="demoOtpValue" class="demo-otp-code"></span>
             </div>
-            <button class="btn btn-ghost btn-sm" id="autoFillBtn" style="padding:4px 10px; font-size:0.75rem; border-color:var(--amber); color:var(--amber);" onclick="autoFillOtp()">Auto-fill Code</button>
+            <button class="btn btn-ghost btn-sm btn-autofill" id="autoFillBtn" onclick="autoFillOtp()">Auto-fill Code</button>
           </div>
-          <div style="font-size:0.75rem; color:var(--slate-dim); margin-top:4px;">(To send real emails to your Gmail inbox, add SYSTEM_SMTP_USER &amp; PASS in .env)</div>
+          <div class="otp-demo-foot">(To send real emails to your Gmail inbox, add SYSTEM_SMTP_USER &amp; PASS in .env)</div>
         </div>
 
 
         <div class="otp-inputs" id="otpInputs">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp0" autocomplete="one-time-code">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp1">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp2">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp3">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp4">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp5">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp0" aria-label="Verification code digit 1" autocomplete="one-time-code">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp1" aria-label="Verification code digit 2">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp2" aria-label="Verification code digit 3">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp3" aria-label="Verification code digit 4">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp4" aria-label="Verification code digit 5">
+          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp5" aria-label="Verification code digit 6">
         </div>
 
         <div class="otp-timer" id="otpTimer">Code expires in <span id="otpCountdown">10:00</span></div>
@@ -140,6 +140,7 @@
 <script>
 // ---- State ----
 let pendingEmail = '';
+let currentDemoOtp = '';
 let otpTimerInterval = null;
 let resendTimerInterval = null;
 let expiresAt = 0;
@@ -171,7 +172,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     });
     const body = await res.json();
     if (!res.ok) { errEl.textContent = body.error || 'Login failed'; return; }
-    window.location.href = '/dashboard.html';
+    window.location.href = '/dashboard';
   } catch (err) {
     errEl.textContent = 'Network error. Is the server running?';
   } finally {
@@ -200,7 +201,8 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     const body = await res.json();
     if (!res.ok) { errEl.textContent = body.error || 'Failed to send code'; return; }
     pendingEmail = email;
-    showOtpPanel(email, body.demo);
+    currentDemoOtp = body.demoOtp || '';
+    showOtpPanel(email, body.demo, body.demoOtp);
   } catch (err) {
     errEl.textContent = 'Network error. Is the server running?';
   } finally {
@@ -210,16 +212,21 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 });
 
 // ---- OTP Panel ----
-function showOtpPanel(email, isDemo) {
+function showOtpPanel(email, isDemo, demoOtp) {
   document.getElementById('signupForm').classList.add('hidden');
   document.getElementById('tabRow').classList.add('hidden');
   document.getElementById('otpPanel').classList.remove('hidden');
   document.getElementById('otpEmailDisplay').textContent = email;
 
-  if (isDemo) {
-    document.getElementById('otpDemoNotice').classList.remove('hidden');
+  const demoNotice = document.getElementById('otpDemoNotice');
+  const demoVal = document.getElementById('demoOtpValue');
+  if (isDemo && demoOtp) {
+    demoNotice.classList.remove('hidden');
+    demoVal.textContent = demoOtp;
+    currentDemoOtp = demoOtp;
   } else {
-    document.getElementById('otpDemoNotice').classList.add('hidden');
+    demoNotice.classList.add('hidden');
+    demoVal.textContent = '';
   }
 
   // Clear digits
@@ -269,6 +276,15 @@ function wireOtpInputs() {
 
 function getOtpValue() {
   return Array.from({ length: 6 }, (_, i) => document.getElementById('otp' + i).value).join('');
+}
+
+function autoFillOtp() {
+  if (!currentDemoOtp) return;
+  const inputs = document.querySelectorAll('.otp-digit');
+  [...currentDemoOtp].forEach((ch, i) => { if (inputs[i]) inputs[i].value = ch; });
+  if (inputs[5]) inputs[5].focus();
+  // Trigger submit after tiny delay so user sees the fill
+  setTimeout(() => submitOtp(), 300);
 }
 
 function updateOtpTimer() {
@@ -328,7 +344,7 @@ async function submitOtp() {
     btn.textContent = '✓ Verified!';
     btn.style.background = 'var(--green)';
     clearInterval(otpTimerInterval);
-    setTimeout(() => { window.location.href = '/dashboard.html'; }, 700);
+    setTimeout(() => { window.location.href = '/dashboard'; }, 700);
   } catch (err) {
     errEl.textContent = 'Network error. Is the server running?';
   } finally {
@@ -354,9 +370,14 @@ async function resendOtp() {
     updateOtpTimer();
     startResendCountdown(60);
     errEl.textContent = '';
-    // Show brief success
-    const notice = document.getElementById('otpDemoNotice');
-    if (body.demo) notice.classList.remove('hidden');
+    // Update demo code if resent
+    if (body.demo && body.demoOtp) {
+      currentDemoOtp = body.demoOtp;
+      const notice = document.getElementById('otpDemoNotice');
+      const val = document.getElementById('demoOtpValue');
+      notice.classList.remove('hidden');
+      val.textContent = body.demoOtp;
+    }
   } catch (err) {
     errEl.textContent = 'Network error.';
   }
@@ -371,7 +392,7 @@ function backToSignup() {
 }
 
 // If already logged in, skip straight to the dashboard
-fetch('/api/me').then(r => r.ok ? (window.location.href = '/dashboard.html') : null);
+fetch('/api/me').then(r => r.ok ? (window.location.href = '/dashboard') : null);
 </script>
 </body>
 </html>
