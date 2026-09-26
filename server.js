@@ -51,7 +51,12 @@ app.get('/login.html',     (req, res) => res.redirect(301, '/login'));
 app.get('/dashboard.html', (req, res) => res.redirect(301, '/dashboard'));
 app.get('/about.html',     (req, res) => res.redirect(301, '/about'));
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const isVercel = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const uploadDir = isVercel ? path.join('/tmp', 'uploads') : path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  try { fs.mkdirSync(uploadDir, { recursive: true }); } catch (e) {}
+}
+const upload = multer({ dest: uploadDir });
 
 // ---------- OTP STORE (in-memory, keyed by email) ----------
 // { email: { otp, expiresAt, name, attempts } }
