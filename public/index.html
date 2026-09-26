@@ -2,397 +2,533 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Oureach.ai — Sign in</title>
+<title>Oureach.ai — Multi-channel outreach, simplified</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Oureach.ai — One dashboard for email, Instagram, Facebook, Twitter, and LinkedIn outreach campaigns.">
+<meta name="description" content="Oureach.ai unifies email, Instagram, Facebook, Twitter and LinkedIn outreach into one smart dashboard. Upload leads, write once, send everywhere.">
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/landing.css">
 </head>
-<body>
+<body class="landing-body">
 
-<div class="auth-shell">
-  <div class="auth-hero">
-    <div class="brand"><span class="dot"></span>oureach<span class="mono">.ai</span></div>
-
-    <div class="pulse-wrap">
-      <svg class="pulse-node" width="360" height="360" viewBox="0 0 360 360">
-        <!-- spokes to five platforms -->
-        <line class="spoke" x1="180" y1="180" x2="180" y2="40"/>
-        <line class="spoke" x1="180" y1="180" x2="308" y2="110"/>
-        <line class="spoke" x1="180" y1="180" x2="308" y2="250"/>
-        <line class="spoke" x1="180" y1="180" x2="180" y2="320"/>
-        <line class="spoke" x1="180" y1="180" x2="52" y2="180"/>
-
-        <circle class="pulse-ring r1" cx="180" cy="180" r="40"/>
-        <circle class="pulse-ring r2" cx="180" cy="180" r="40"/>
-        <circle class="pulse-ring r3" cx="180" cy="180" r="40"/>
-
-        <circle cx="180" cy="180" r="26" fill="#0B1220" stroke="#FFB020" stroke-width="2"/>
-        <text x="180" y="185" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#FFB020" font-weight="700">YOU</text>
-
-        <!-- platform labels -->
-        <g font-family="Space Grotesk" font-size="9" fill="#8C97AC" text-anchor="middle">
-          <circle cx="180" cy="40" r="16" fill="#1B2740" stroke="#263149"/>
-          <text x="180" y="44">✉</text>
-          <circle cx="308" cy="110" r="16" fill="#1B2740" stroke="#263149"/>
-          <text x="308" y="114">ig</text>
-          <circle cx="308" cy="250" r="16" fill="#1B2740" stroke="#263149"/>
-          <text x="308" y="254">f</text>
-          <circle cx="180" cy="320" r="16" fill="#1B2740" stroke="#263149"/>
-          <text x="180" y="324">𝕏</text>
-          <circle cx="52" cy="180" r="16" fill="#1B2740" stroke="#263149"/>
-          <text x="52" y="184">in</text>
-        </g>
-      </svg>
+<!-- ===== NAV ===== -->
+<nav class="lp-nav" id="lpNav">
+  <div class="lp-nav-inner">
+    <a href="/" class="brand"><span class="dot"></span>oureach<span class="mono">.ai</span></a>
+    <div class="lp-nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="/about">About</a>
+      <a href="/login" class="btn btn-ghost btn-sm">Log in</a>
+      <a href="/login#signup" class="btn btn-primary btn-sm">Get started free</a>
     </div>
+    <button class="lp-hamburger" id="lpHamburger" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="lp-mobile-nav hidden" id="lpMobileNav">
+    <a href="#features" onclick="toggleMobileNav()">Features</a>
+    <a href="#how-it-works" onclick="toggleMobileNav()">How it works</a>
+    <a href="/about">About</a>
+    <a href="/login" class="btn btn-ghost btn-sm">Log in</a>
+    <a href="/login#signup" class="btn btn-primary btn-sm">Get started free</a>
+  </div>
+</nav>
 
-    <div class="hero-copy">
-      <h1>One inbox for every channel you reach people on.</h1>
-      <p>Connect your email and your Instagram, Facebook, Twitter and LinkedIn once. Upload a lead list, write a message, and Oureach.ai tracks every send, open and reply on a single dashboard.</p>
-    </div>
+<!-- ===== HERO ===== -->
+<section class="lp-hero">
+  <div class="lp-hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-grid"></div>
   </div>
 
-  <div class="auth-form-side">
-    <div class="auth-form-wrap">
-
-      <!-- Tab toggle (hidden during OTP step) -->
-      <div class="tab-toggle" id="tabRow">
-        <button id="tabLogin" class="active" onclick="showTab('login')">Log in</button>
-        <button id="tabSignup" onclick="showTab('signup')">Create account</button>
+  <div class="lp-hero-inner">
+    <div class="lp-hero-text">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Multi-channel outreach platform
       </div>
+      <h1 class="hero-h1">
+        One dashboard.<br>
+        <span class="gradient-text">Every channel.</span><br>
+        Zero friction.
+      </h1>
+      <p class="hero-sub">
+        Connect email, Instagram, Facebook, Twitter and LinkedIn once.
+        Upload a lead list, write your message, and Oureach.ai sends to
+        everyone — tracking every result on a single live dashboard.
+      </p>
+      <div class="hero-cta-row">
+        <a href="/login#signup" class="btn btn-primary btn-lg" id="heroGetStarted">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Start for free
+        </a>
+        <a href="#features" class="btn btn-ghost btn-lg" id="heroSeeFeatures">
+          See features
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l10-10M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          No credit card needed
+        </span>
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Email verified accounts
+        </span>
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Works in demo mode instantly
+        </span>
+      </div>
+    </div>
 
-      <!-- ===== LOGIN FORM ===== -->
-      <form id="loginForm" autocomplete="on">
-        <div class="field">
-          <label>Email</label>
-          <input type="email" id="loginEmail" required placeholder="you@company.com" autocomplete="email">
+    <div class="lp-hero-visual">
+      <div class="hero-dashboard-preview">
+        <div class="preview-topbar">
+          <div class="preview-dot r"></div>
+          <div class="preview-dot y"></div>
+          <div class="preview-dot g"></div>
+          <span class="preview-url">oureach.ai/dashboard</span>
         </div>
-        <div class="field">
-          <label>Password</label>
-          <input type="password" id="loginPassword" required placeholder="••••••••" autocomplete="current-password">
-        </div>
-        <button class="btn btn-primary btn-block" type="submit" id="loginBtn">Log in</button>
-        <div class="error-msg" id="loginError"></div>
-      </form>
-
-      <!-- ===== SIGNUP STEP 1: Details ===== -->
-      <form id="signupForm" class="hidden" autocomplete="on">
-        <div class="field">
-          <label>Full name</label>
-          <input type="text" id="signupName" required placeholder="Parv Patel" autocomplete="name">
-        </div>
-        <div class="field">
-          <label>Email</label>
-          <input type="email" id="signupEmail" required placeholder="you@company.com" autocomplete="email">
-        </div>
-        <div class="field">
-          <label>Password</label>
-          <input type="password" id="signupPassword" required placeholder="At least 6 characters" minlength="6" autocomplete="new-password">
-        </div>
-        <button class="btn btn-primary btn-block" type="submit" id="signupBtn">Send verification code</button>
-        <div class="error-msg" id="signupError"></div>
-      </form>
-
-      <!-- ===== SIGNUP STEP 2: OTP Verification ===== -->
-      <div id="otpPanel" class="hidden">
-        <div class="otp-header">
-          <div class="otp-icon">✉</div>
-          <h2 class="otp-title">Check your email</h2>
-          <p class="otp-sub">We sent a 6-digit verification code to<br><strong id="otpEmailDisplay"></strong></p>
-        </div>
-
-        <!-- Demo mode notice -->
-        <div class="otp-demo-notice hidden" id="otpDemoNotice">
-          <div class="otp-demo-head">
-            <div>
-              <span>⚡</span> <strong>Demo Mode OTP Code:</strong> <span id="demoOtpValue" class="demo-otp-code"></span>
+        <div class="preview-body">
+          <div class="preview-stat-row">
+            <div class="preview-stat">
+              <div class="ps-label">Leads</div>
+              <div class="ps-num">248</div>
             </div>
-            <button class="btn btn-ghost btn-sm btn-autofill" id="autoFillBtn" onclick="autoFillOtp()">Auto-fill Code</button>
+            <div class="preview-stat">
+              <div class="ps-label">Campaigns</div>
+              <div class="ps-num">12</div>
+            </div>
+            <div class="preview-stat">
+              <div class="ps-label">Sent</div>
+              <div class="ps-num green">1,840</div>
+            </div>
+            <div class="preview-stat">
+              <div class="ps-label">Failed</div>
+              <div class="ps-num amber">7</div>
+            </div>
           </div>
-          <div class="otp-demo-foot">(To send real emails to your Gmail inbox, add SYSTEM_SMTP_USER &amp; PASS in .env)</div>
-        </div>
-
-
-        <div class="otp-inputs" id="otpInputs">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp0" aria-label="Verification code digit 1" autocomplete="one-time-code">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp1" aria-label="Verification code digit 2">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp2" aria-label="Verification code digit 3">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp3" aria-label="Verification code digit 4">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp4" aria-label="Verification code digit 5">
-          <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" id="otp5" aria-label="Verification code digit 6">
-        </div>
-
-        <div class="otp-timer" id="otpTimer">Code expires in <span id="otpCountdown">10:00</span></div>
-        <div class="error-msg" id="otpError"></div>
-
-        <button class="btn btn-primary btn-block" id="otpVerifyBtn" onclick="submitOtp()">Verify &amp; create account</button>
-
-        <div class="otp-footer-row">
-          <button class="btn-link" id="resendBtn" onclick="resendOtp()" disabled>Resend code (<span id="resendCountdown">60</span>s)</button>
-          <button class="btn-link" onclick="backToSignup()">← Change email</button>
+          <div class="preview-channels">
+            <div class="preview-channel connected">
+              <span class="pc-icon email-icon">✉</span>
+              <span class="pc-name">Email</span>
+              <span class="pc-badge">Connected</span>
+            </div>
+            <div class="preview-channel connected">
+              <span class="pc-icon ig-icon">ig</span>
+              <span class="pc-name">Instagram</span>
+              <span class="pc-badge">Connected</span>
+            </div>
+            <div class="preview-channel">
+              <span class="pc-icon fb-icon">f</span>
+              <span class="pc-name">Facebook</span>
+              <span class="pc-badge grey">–</span>
+            </div>
+            <div class="preview-channel connected">
+              <span class="pc-icon tw-icon">𝕏</span>
+              <span class="pc-name">Twitter</span>
+              <span class="pc-badge">Connected</span>
+            </div>
+            <div class="preview-channel">
+              <span class="pc-icon li-icon">in</span>
+              <span class="pc-name">LinkedIn</span>
+              <span class="pc-badge grey">–</span>
+            </div>
+          </div>
+          <div class="preview-activity">
+            <div class="preview-act-title">Recent activity</div>
+            <div class="preview-act-item">
+              <span class="act-dot green-dot"></span>
+              <span class="act-text">July Launch → Priya Sharma <b class="act-sent">sent</b></span>
+            </div>
+            <div class="preview-act-item">
+              <span class="act-dot green-dot"></span>
+              <span class="act-text">July Launch → Rahul Mehta <b class="act-sent">sent</b></span>
+            </div>
+            <div class="preview-act-item">
+              <span class="act-dot amber-dot"></span>
+              <span class="act-text">IG Promo → Alex Chen <b class="act-fail">failed</b></span>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- Floating notification badge -->
+      <div class="preview-notif" id="previewNotif">
+        <span class="notif-dot"></span>
+        Campaign launched · 3 sent, 0 failed
+      </div>
+    </div>
+  </div>
+</section>
 
-      <p class="foot-note">By continuing you agree this is a student project demo. Don't use real account passwords you can't rotate.</p>
+<!-- ===== STATS STRIP ===== -->
+<div class="lp-stats-strip">
+  <div class="lp-stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Channels in one place</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">CSV</div>
+      <div class="stat-label">Bulk lead import</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">OTP</div>
+      <div class="stat-label">Email-verified accounts</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">1-click</div>
+      <div class="stat-label">Campaign launch</div>
     </div>
   </div>
 </div>
 
+<!-- ===== FEATURES ===== -->
+<section class="lp-section" id="features">
+  <div class="lp-section-inner">
+    <div class="section-eyebrow">What you get</div>
+    <h2 class="section-h2">Everything for multi-channel outreach</h2>
+    <p class="section-sub">Built for founders, creators, and marketers who don't want five separate tools.</p>
+
+    <div class="features-grid">
+
+      <div class="feature-card" data-delay="0">
+        <div class="fc-icon fc-amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+        </div>
+        <h3>Real email delivery</h3>
+        <p>Connect any Gmail or SMTP account with an app password. Oureach.ai sends real emails directly from your account so replies land in your inbox, not a shared platform.</p>
+        <div class="fc-tag">SMTP · Works with Gmail, Outlook, custom</div>
+      </div>
+
+      <div class="feature-card" data-delay="100">
+        <div class="fc-icon fc-pink">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </div>
+        <h3>Social platform reach</h3>
+        <p>Instagram, Facebook, Twitter/X, and LinkedIn — all in one campaign. Map leads to their social handles and send personalised DMs or posts from a single compose window.</p>
+        <div class="fc-tag">Demo mode ships out of the box</div>
+      </div>
+
+      <div class="feature-card" data-delay="200">
+        <div class="fc-icon fc-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Smart lead management</h3>
+        <p>Import hundreds of leads from a CSV with one click, or add them manually. Search, filter, and browse leads instantly. Include only the leads you want in each campaign.</p>
+        <div class="fc-tag">CSV import · Manual add · Live search</div>
+      </div>
+
+      <div class="feature-card" data-delay="300">
+        <div class="fc-icon fc-blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Live campaign analytics</h3>
+        <p>See every send, failure, and result the moment it happens. The activity feed updates in real time — per lead, per channel, per campaign — so you always know what's landing.</p>
+        <div class="fc-tag">Per-lead result tracking</div>
+      </div>
+
+      <div class="feature-card" data-delay="400">
+        <div class="fc-icon fc-amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c1.1 0 2-.9 2-2H10c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+        </div>
+        <h3>In-app notifications</h3>
+        <p>A notification bell keeps you updated without interrupting your flow. Get alerts for successful sends, failures, newly imported leads, and connected accounts — all in a tidy dropdown.</p>
+        <div class="fc-tag">Real-time · Unread count badge</div>
+      </div>
+
+      <div class="feature-card" data-delay="500">
+        <div class="fc-icon fc-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>OTP email verification</h3>
+        <p>Every new account is verified with a 6-digit code sent to your inbox. Keeps the platform secure, spam-free, and trusted. Works in demo mode too — the code is shown on screen.</p>
+        <div class="fc-tag">6-digit OTP · 10-min expiry · Rate limited</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="lp-section lp-alt-bg" id="how-it-works">
+  <div class="lp-section-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-h2">From signup to first send in minutes</h2>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Create your account</h3>
+        <p>Sign up with your email and verify with a 6-digit OTP code. Your account is ready immediately after verification.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Connect your channels</h3>
+        <p>Add your Gmail (or any SMTP) with an app password for real email sends. Social platforms work in demo mode instantly.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Import your leads</h3>
+        <p>Upload a CSV or add leads manually. Include name, email, and social handles. Search and filter your list at any time.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>Launch your campaign</h3>
+        <p>Write your message, use {{name}} to personalise, pick your leads, and hit launch. Watch results come in on the live dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHANNEL STRIP ===== -->
+<section class="lp-section">
+  <div class="lp-section-inner lp-channels-section">
+    <div class="lp-channels-text">
+      <div class="section-eyebrow">Channels</div>
+      <h2 class="section-h2">Five platforms, one dashboard</h2>
+      <p class="section-sub">Stop switching between five apps to track your outreach. Oureach.ai puts every channel in one place so you can focus on writing great messages, not managing tabs.</p>
+      <a href="/login#signup" class="btn btn-primary" id="channelCTA">Connect your first channel →</a>
+    </div>
+    <div class="lp-channels-icons">
+      <div class="channel-pill email-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+        Email
+      </div>
+      <div class="channel-pill ig-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        Instagram
+      </div>
+      <div class="channel-pill fb-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l.5-4H13V6.5c0-1.15.32-1.93 1.97-1.93H16.5V1.08C16.19 1.04 15.14 1 13.92 1 11.4 1 9.66 2.54 9.66 5.31V9H7v4h2.66v9H13z"/></svg>
+        Facebook
+      </div>
+      <div class="channel-pill tw-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 3H21l-6.5 7.4L22 21h-6.4l-5-6.5L4.7 21H2.6l6.9-7.9L2 3h6.5l4.5 6z"/></svg>
+        Twitter / X
+      </div>
+      <div class="channel-pill li-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.78 0-2.05 1.39-2.05 2.82V21H9z"/></svg>
+        LinkedIn
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<section class="lp-cta-banner">
+  <div class="cta-banner-inner">
+    <div class="cta-orb cta-orb-1"></div>
+    <div class="cta-orb cta-orb-2"></div>
+    <h2>Ready to unify your outreach?</h2>
+    <p>Sign up in 30 seconds. Verify your email with OTP. Start reaching leads on every channel.</p>
+    <div class="cta-btn-row">
+      <a href="/login#signup" class="btn btn-primary btn-lg" id="ctaBannerBtn">Create free account</a>
+      <a href="/login" class="btn btn-ghost btn-lg" id="ctaLoginBtn">Log in</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="lp-footer">
+  <div class="lp-footer-inner">
+    <div class="lp-footer-brand">
+      <div class="brand"><span class="dot"></span>oureach<span class="mono">.ai</span></div>
+      <p>A multi-channel outreach platform built as a college project.<br>Connect email and social — track everything in one place.</p>
+    </div>
+    <div class="lp-footer-links">
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="/dashboard">Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="/about">About &amp; Founder</a>
+        <a href="/login">Log in</a>
+        <a href="/login#signup">Sign up</a>
+      </div>
+    </div>
+  </div>
+  <div class="lp-footer-bottom">
+    Oureach.ai — built by Parv Patel · College Minor Project · 2026
+  </div>
+</footer>
+
+<style>
+/* Auto-redirect progress bar */
+.redirect-bar-wrap {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: rgba(11,18,32,0.92);
+  border-top: 1px solid #1E2A3A;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+}
+.redirect-bar-wrap.show { transform: translateY(0); }
+.redirect-bar-track {
+  flex: 1;
+  height: 4px;
+  background: #1E2A3A;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.redirect-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FFB020, #FF8C00);
+  border-radius: 4px;
+  width: 100%;
+  transition: width linear;
+}
+.redirect-bar-label {
+  color: #8C97AC;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.redirect-bar-label b { color: #FFB020; }
+.redirect-skip-btn {
+  background: none;
+  border: 1px solid #263149;
+  color: #8C97AC;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.redirect-skip-btn:hover { border-color: #FFB020; color: #FFB020; }
+.redirect-skip-btn.cancel { border-color: #3D4A5C; }
+</style>
+
+<!-- Auto-redirect bar (shown for unauthenticated users) -->
+<div class="redirect-bar-wrap" id="redirectBar">
+  <div class="redirect-bar-label">Redirecting to sign in in <b id="redirectCount">5</b>s</div>
+  <div class="redirect-bar-track">
+    <div class="redirect-bar-fill" id="redirectFill"></div>
+  </div>
+  <button class="redirect-skip-btn" onclick="goToLogin()">Sign in now →</button>
+  <button class="redirect-skip-btn cancel" onclick="cancelRedirect()">Stay here</button>
+</div>
+
 <script>
-// ---- State ----
-let pendingEmail = '';
-let currentDemoOtp = '';
-let otpTimerInterval = null;
-let resendTimerInterval = null;
-let expiresAt = 0;
-
-function showTab(which) {
-  document.getElementById('tabLogin').classList.toggle('active', which === 'login');
-  document.getElementById('tabSignup').classList.toggle('active', which === 'signup');
-  document.getElementById('loginForm').classList.toggle('hidden', which !== 'login');
-  document.getElementById('signupForm').classList.toggle('hidden', which !== 'signup');
-  document.getElementById('otpPanel').classList.add('hidden');
-  document.getElementById('tabRow').classList.remove('hidden');
-}
-
-// ---- Login ----
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value;
-  const errEl = document.getElementById('loginError');
-  const btn = document.getElementById('loginBtn');
-  errEl.textContent = '';
-  btn.disabled = true;
-  btn.textContent = 'Logging in…';
-  try {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
-    const body = await res.json();
-    if (!res.ok) { errEl.textContent = body.error || 'Login failed'; return; }
-    window.location.href = '/dashboard';
-  } catch (err) {
-    errEl.textContent = 'Network error. Is the server running?';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Log in';
-  }
+// Sticky nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('lpNav').classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// ---- Signup Step 1: Send OTP ----
-document.getElementById('signupForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const name = document.getElementById('signupName').value.trim();
-  const email = document.getElementById('signupEmail').value.trim();
-  const password = document.getElementById('signupPassword').value;
-  const errEl = document.getElementById('signupError');
-  const btn = document.getElementById('signupBtn');
-  errEl.textContent = '';
-  btn.disabled = true;
-  btn.textContent = 'Sending code…';
-  try {
-    const res = await fetch('/api/auth/send-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password })
-    });
-    const body = await res.json();
-    if (!res.ok) { errEl.textContent = body.error || 'Failed to send code'; return; }
-    pendingEmail = email;
-    currentDemoOtp = body.demoOtp || '';
-    showOtpPanel(email, body.demo, body.demoOtp);
-  } catch (err) {
-    errEl.textContent = 'Network error. Is the server running?';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Send verification code';
-  }
-});
-
-// ---- OTP Panel ----
-function showOtpPanel(email, isDemo, demoOtp) {
-  document.getElementById('signupForm').classList.add('hidden');
-  document.getElementById('tabRow').classList.add('hidden');
-  document.getElementById('otpPanel').classList.remove('hidden');
-  document.getElementById('otpEmailDisplay').textContent = email;
-
-  const demoNotice = document.getElementById('otpDemoNotice');
-  const demoVal = document.getElementById('demoOtpValue');
-  if (isDemo && demoOtp) {
-    demoNotice.classList.remove('hidden');
-    demoVal.textContent = demoOtp;
-    currentDemoOtp = demoOtp;
-  } else {
-    demoNotice.classList.add('hidden');
-    demoVal.textContent = '';
-  }
-
-  // Clear digits
-  for (let i = 0; i < 6; i++) {
-    document.getElementById('otp' + i).value = '';
-  }
-  document.getElementById('otp0').focus();
-  document.getElementById('otpError').textContent = '';
-
-  // Start 10-minute expiry timer
-  expiresAt = Date.now() + 10 * 60 * 1000;
-  clearInterval(otpTimerInterval);
-  otpTimerInterval = setInterval(updateOtpTimer, 1000);
-  updateOtpTimer();
-
-  // Start 60s resend cooldown
-  startResendCountdown(60);
-
-  // Wire up OTP digit inputs
-  wireOtpInputs();
+// Mobile nav toggle
+function toggleMobileNav() {
+  document.getElementById('lpMobileNav').classList.toggle('hidden');
 }
 
-function wireOtpInputs() {
-  const inputs = document.querySelectorAll('.otp-digit');
-  inputs.forEach((inp, i) => {
-    inp.oninput = (e) => {
-      const val = e.target.value.replace(/\D/g, '');
-      e.target.value = val;
-      if (val && i < inputs.length - 1) inputs[i + 1].focus();
-      if (getOtpValue().length === 6) submitOtp();
-    };
-    inp.onkeydown = (e) => {
-      if (e.key === 'Backspace' && !inp.value && i > 0) {
-        inputs[i - 1].focus();
-        inputs[i - 1].value = '';
-      }
-    };
-    inp.onpaste = (e) => {
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
       e.preventDefault();
-      const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
-      [...paste].forEach((ch, j) => { if (inputs[j]) inputs[j].value = ch; });
-      if (inputs[paste.length - 1]) inputs[paste.length - 1].focus();
-      if (paste.length === 6) submitOtp();
-    };
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
+});
+
+// Feature cards entrance animation on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.feature-card, .step-card').forEach(el => observer.observe(el));
+
+// Floating notification bounce
+setTimeout(() => {
+  document.getElementById('previewNotif').classList.add('notif-show');
+}, 1200);
+
+// Handle #signup hash on login page links
+document.querySelectorAll('a[href="/login#signup"]').forEach(a => {
+  a.addEventListener('click', () => {
+    sessionStorage.setItem('openTab', 'signup');
+  });
+});
+
+// ── Auto-redirect logic ──────────────────────────────────────────────────────
+const REDIRECT_DELAY = 5000; // ms to wait before redirecting to /login
+let redirectTimer = null;
+let redirectCancelled = false;
+
+function goToLogin() {
+  clearInterval(redirectTimer);
+  window.location.href = '/login';
 }
 
-function getOtpValue() {
-  return Array.from({ length: 6 }, (_, i) => document.getElementById('otp' + i).value).join('');
+function cancelRedirect() {
+  redirectCancelled = true;
+  clearInterval(redirectTimer);
+  const bar = document.getElementById('redirectBar');
+  bar.classList.remove('show');
 }
 
-function autoFillOtp() {
-  if (!currentDemoOtp) return;
-  const inputs = document.querySelectorAll('.otp-digit');
-  [...currentDemoOtp].forEach((ch, i) => { if (inputs[i]) inputs[i].value = ch; });
-  if (inputs[5]) inputs[5].focus();
-  // Trigger submit after tiny delay so user sees the fill
-  setTimeout(() => submitOtp(), 300);
-}
+function startRedirectCountdown() {
+  const bar    = document.getElementById('redirectBar');
+  const fill   = document.getElementById('redirectFill');
+  const count  = document.getElementById('redirectCount');
 
-function updateOtpTimer() {
-  const remaining = Math.max(0, expiresAt - Date.now());
-  const m = Math.floor(remaining / 60000);
-  const s = Math.floor((remaining % 60000) / 1000);
-  document.getElementById('otpCountdown').textContent = `${m}:${String(s).padStart(2, '0')}`;
-  if (remaining === 0) {
-    clearInterval(otpTimerInterval);
-    document.getElementById('otpError').textContent = 'Code expired. Please resend.';
-  }
-}
+  // Show the bar
+  setTimeout(() => bar.classList.add('show'), 600);
 
-function startResendCountdown(seconds) {
-  const btn = document.getElementById('resendBtn');
-  btn.disabled = true;
-  let remaining = seconds;
-  clearInterval(resendTimerInterval);
-  document.getElementById('resendCountdown').textContent = remaining;
-  resendTimerInterval = setInterval(() => {
+  // Animate the fill shrinking over REDIRECT_DELAY ms
+  fill.style.transition = `width ${REDIRECT_DELAY}ms linear`;
+  setTimeout(() => { fill.style.width = '0%'; }, 650);
+
+  // Countdown label
+  let remaining = Math.round(REDIRECT_DELAY / 1000);
+  count.textContent = remaining;
+  redirectTimer = setInterval(() => {
     remaining--;
-    document.getElementById('resendCountdown').textContent = remaining;
+    count.textContent = remaining;
     if (remaining <= 0) {
-      clearInterval(resendTimerInterval);
-      btn.disabled = false;
-      btn.textContent = 'Resend code';
+      clearInterval(redirectTimer);
+      if (!redirectCancelled) window.location.href = '/login';
     }
   }, 1000);
 }
 
-async function submitOtp() {
-  const otp = getOtpValue();
-  if (otp.length !== 6) return;
-  const errEl = document.getElementById('otpError');
-  const btn = document.getElementById('otpVerifyBtn');
-  errEl.textContent = '';
-  btn.disabled = true;
-  btn.textContent = 'Verifying…';
-  try {
-    const res = await fetch('/api/auth/verify-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: pendingEmail, otp })
-    });
-    const body = await res.json();
-    if (!res.ok) {
-      errEl.textContent = body.error || 'Verification failed';
-      // Shake animation
-      document.getElementById('otpInputs').classList.add('otp-shake');
-      setTimeout(() => document.getElementById('otpInputs').classList.remove('otp-shake'), 600);
-      // Clear inputs
-      for (let i = 0; i < 6; i++) document.getElementById('otp' + i).value = '';
-      document.getElementById('otp0').focus();
-      return;
+// Check auth first — if already logged in, skip redirect and go straight to dashboard
+fetch('/api/me')
+  .then(r => {
+    if (r.ok) {
+      window.location.href = '/dashboard';
+    } else {
+      // Not logged in → start countdown to /login
+      startRedirectCountdown();
     }
-    // Success! Show checkmark, then redirect
-    btn.textContent = '✓ Verified!';
-    btn.style.background = 'var(--green)';
-    clearInterval(otpTimerInterval);
-    setTimeout(() => { window.location.href = '/dashboard'; }, 700);
-  } catch (err) {
-    errEl.textContent = 'Network error. Is the server running?';
-  } finally {
-    btn.disabled = false;
-    if (btn.textContent !== '✓ Verified!') btn.textContent = 'Verify & create account';
-  }
-}
-
-async function resendOtp() {
-  const errEl = document.getElementById('otpError');
-  errEl.textContent = '';
-  try {
-    const res = await fetch('/api/auth/resend-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: pendingEmail })
-    });
-    const body = await res.json();
-    if (!res.ok) { errEl.textContent = body.error; return; }
-    expiresAt = Date.now() + 10 * 60 * 1000;
-    clearInterval(otpTimerInterval);
-    otpTimerInterval = setInterval(updateOtpTimer, 1000);
-    updateOtpTimer();
-    startResendCountdown(60);
-    errEl.textContent = '';
-    // Update demo code if resent
-    if (body.demo && body.demoOtp) {
-      currentDemoOtp = body.demoOtp;
-      const notice = document.getElementById('otpDemoNotice');
-      const val = document.getElementById('demoOtpValue');
-      notice.classList.remove('hidden');
-      val.textContent = body.demoOtp;
-    }
-  } catch (err) {
-    errEl.textContent = 'Network error.';
-  }
-}
-
-function backToSignup() {
-  clearInterval(otpTimerInterval);
-  clearInterval(resendTimerInterval);
-  document.getElementById('otpPanel').classList.add('hidden');
-  document.getElementById('tabRow').classList.remove('hidden');
-  showTab('signup');
-}
-
-// If already logged in, skip straight to the dashboard
-fetch('/api/me').then(r => r.ok ? (window.location.href = '/dashboard') : null);
+  })
+  .catch(() => {
+    // Server unreachable — still start countdown
+    startRedirectCountdown();
+  });
 </script>
 </body>
 </html>
