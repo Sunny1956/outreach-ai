@@ -188,23 +188,32 @@ async function refreshAll() {
     fetch('/api/leads').then(r => r.json()),
     fetch('/api/campaigns').then(r => r.json())
   ]);
-  STATE.accounts = accounts; STATE.leads = leads; STATE.campaigns = campaigns;
+  STATE.accounts = Array.isArray(accounts) ? accounts : [];
+  STATE.leads = Array.isArray(leads) ? leads : [];
+  STATE.campaigns = Array.isArray(campaigns) ? campaigns : [];
 
   document.getElementById('demoNote').textContent = stats.demoMode
     ? 'Demo mode: email sends for real, social sends are simulated until API keys are added.'
     : 'Live mode: all connected channels send for real.';
 
-  document.getElementById('statLeads').textContent = stats.totalLeads;
-  document.getElementById('statCampaigns').textContent = stats.totalCampaigns;
-  document.getElementById('statSent').textContent = stats.totalSent;
-  document.getElementById('statFailed').textContent = stats.totalFailed;
+  document.getElementById('statLeads').textContent = stats.totalLeads ?? 0;
+  document.getElementById('statCampaigns').textContent = stats.totalCampaigns ?? 0;
+  document.getElementById('statSent').textContent = stats.totalSent ?? 0;
+  document.getElementById('statFailed').textContent = stats.totalFailed ?? 0;
 
   // Platform grid
   const grid = document.getElementById('platformGrid');
-  grid.innerHTML = stats.byPlatform.map(p => `
+  const platforms = Array.isArray(stats.byPlatform) ? stats.byPlatform : [
+    { platform: 'email', connected: false, sent: 0, failed: 0 },
+    { platform: 'instagram', connected: false, sent: 0, failed: 0 },
+    { platform: 'facebook', connected: false, sent: 0, failed: 0 },
+    { platform: 'twitter', connected: false, sent: 0, failed: 0 },
+    { platform: 'linkedin', connected: false, sent: 0, failed: 0 }
+  ];
+  grid.innerHTML = platforms.map(p => `
     <div class="card platform-card">
       <div class="head">
-        <div class="p-icon p-${p.platform}">${PLATFORM_ICONS[p.platform]}</div>
+        <div class="p-icon p-${p.platform}">${PLATFORM_ICONS[p.platform] || ''}</div>
         <div>
           <div class="name">${p.platform}</div>
           <span class="badge ${p.connected ? 'badge-green' : 'badge-slate'}">${p.connected ? 'Connected' : 'Not connected'}</span>

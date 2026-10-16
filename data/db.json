@@ -33,7 +33,7 @@
       "id": "1785902739729",
       "name": "test",
       "email": "patelsani9342@gmail.com",
-      "passwordHash": "$2a$10$G2l9wqUsxR3ZChsh0wotIOqvb2d26fZNjXCtg9cXwmVUArrw0EuOi",
+      "passwordHash": "$2a$10$hmSx5qLT.cgCrV3gTthSJOOWGuqBuetK4Cx/hOLJhCheuNri7cI9O",
       "isVerified": true,
       "createdAt": "2026-08-05T04:08:24.456Z"
     },
@@ -44,6 +44,14 @@
       "passwordHash": "$2a$10$hLfaCqXCq/RVQ1Qbrb32S.Mi.Ze6Wq7ZchHmC1E3uCbfS1jShGPYq",
       "isVerified": true,
       "createdAt": "2026-08-11T03:23:31.230Z"
+    },
+    {
+      "id": "1791950981422",
+      "name": "Test",
+      "email": "23012011076@gnu.ac.in",
+      "passwordHash": "$2a$10$6DYypKz26qhxYEOKOrlRHeSAgeUehC9Yh.zuAWDSOuLft2l7dUiR2",
+      "isVerified": true,
+      "createdAt": "2026-10-14T04:13:59.990Z"
     }
   ],
   "accounts": [
@@ -79,6 +87,17 @@
       "smtpUser": null,
       "smtpPass": null,
       "connectedAt": "2026-08-05T04:14:19.308Z"
+    },
+    {
+      "id": "1791950981423",
+      "userId": "1791950981422",
+      "platform": "instagram",
+      "handle": "sunnypatel_2134",
+      "smtpHost": null,
+      "smtpPort": null,
+      "smtpUser": null,
+      "smtpPass": null,
+      "connectedAt": "2026-10-14T04:15:00.000Z"
     }
   ],
   "leads": [
@@ -129,6 +148,30 @@
       "linkedin": "",
       "source": "manual",
       "createdAt": "2026-08-05T04:12:44.150Z"
+    },
+    {
+      "id": "1791950981424",
+      "userId": "1791950981422",
+      "name": "parv patel",
+      "email": "patelsani9342@gmail.com",
+      "instagram": "parv_patel",
+      "facebook": "",
+      "twitter": "",
+      "linkedin": "",
+      "source": "manual",
+      "createdAt": "2026-10-14T04:15:10.000Z"
+    },
+    {
+      "id": "1791950981425",
+      "userId": "1791950981422",
+      "name": "sunny",
+      "email": "sunny234@gmail.com",
+      "instagram": "suny_patel2134",
+      "facebook": "",
+      "twitter": "",
+      "linkedin": "",
+      "source": "manual",
+      "createdAt": "2026-10-14T04:15:20.000Z"
     }
   ],
   "campaigns": [
@@ -173,6 +216,21 @@
       "status": "sent",
       "createdAt": "2026-08-05T04:13:38.714Z",
       "launchedAt": "2026-08-05T04:20:53.783Z"
+    },
+    {
+      "id": "1791950981426",
+      "userId": "1791950981422",
+      "name": "Personal Finance Outreach",
+      "channel": "instagram",
+      "subject": "",
+      "message": "Hi {{name}}, checking in on Instagram!",
+      "leadIds": [
+        "1791950981424",
+        "1791950981425"
+      ],
+      "status": "sent",
+      "createdAt": "2026-10-14T04:15:30.000Z",
+      "launchedAt": "2026-10-14T04:16:00.000Z"
     }
   ],
   "logs": [
@@ -202,6 +260,24 @@
       "success": false,
       "detail": "Lead has no instagram handle on file.",
       "sentAt": "2026-08-05T04:20:53.783Z"
+    },
+    {
+      "id": "1791950981427",
+      "campaignId": "1791950981426",
+      "leadId": "1791950981424",
+      "platform": "instagram",
+      "success": true,
+      "detail": "Simulated instagram message delivered to parv_patel",
+      "sentAt": "2026-10-14T04:16:00.000Z"
+    },
+    {
+      "id": "1791950981428",
+      "campaignId": "1791950981426",
+      "leadId": "1791950981425",
+      "platform": "instagram",
+      "success": true,
+      "detail": "Simulated instagram message delivered to suny_patel2134",
+      "sentAt": "2026-10-14T04:16:05.000Z"
     }
   ]
 }

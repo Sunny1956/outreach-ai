@@ -8,6 +8,8 @@ const path = require('path');
 const fs = require('fs');
 const { parse } = require('csv-parse/sync');
 
+const crypto = require('crypto');
+
 const db = require('./src/db');
 const { requireLogin } = require('./src/auth');
 const mailer = require('./src/mailer');
@@ -16,14 +18,86 @@ const social = require('./src/social');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const SESSION_MAX_AGE = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
+const AUTH_COOKIE_NAME = 'oureach_auth';
+const AUTH_SECRET = process.env.SESSION_SECRET || 'dev-secret-change-me';
+
+function createAuthToken(userId) {
+  const expiresAt = Date.now() + SESSION_MAX_AGE;
+  const payload = Buffer.from(JSON.stringify({ userId, expiresAt })).toString('base64url');
+  const hmac = crypto.createHmac('sha256', AUTH_SECRET).update(payload).digest('base64url');
+  return `${payload}.${hmac}`;
+}
+
+function verifyAuthToken(token) {
+  if (!token || typeof token !== 'string') return null;
+  const parts = token.split('.');
+  if (parts.length !== 2) return null;
+  const [payload, hmac] = parts;
+  const expectedHmac = crypto.createHmac('sha256', AUTH_SECRET).update(payload).digest('base64url');
+  if (hmac !== expectedHmac) return null;
+  try {
+    const data = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
+    if (!data.userId || !data.expiresAt) return null;
+    if (Date.now() > data.expiresAt) return null;
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
+
+function parseCookies(header) {
+  const list = {};
+  if (!header) return list;
+  header.split(';').forEach(c => {
+    const parts = c.split('=');
+    const name = parts[0].trim();
+    if (name) list[name] = decodeURIComponent((parts[1] || '').trim());
+  });
+  return list;
+}
+
+function attachAuthCookie(res, userId) {
+  const token = createAuthToken(userId);
+  const isSecure = process.env.NODE_ENV === 'production' || !!process.env.VERCEL;
+  const cookieStr = `${AUTH_COOKIE_NAME}=${encodeURIComponent(token)}; Path=/; Max-Age=${30 * 24 * 60 * 60}; HttpOnly; SameSite=Lax${isSecure ? '; Secure' : ''}`;
+  res.setHeader('Set-Cookie', cookieStr);
+}
+
+function removeAuthCookie(res) {
+  res.setHeader('Set-Cookie', `${AUTH_COOKIE_NAME}=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax`);
+}
+
+app.set('trust proxy', 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'dev-secret-change-me',
+  secret: AUTH_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 } // 7 days
+  rolling: true,
+  cookie: {
+    maxAge: SESSION_MAX_AGE,
+    httpOnly: true,
+    sameSite: 'lax'
+  }
 }));
+
+// Stateless persistent 30-day session recovery (survives Vercel container restarts)
+app.use((req, res, next) => {
+  if (req.session && req.session.userId) return next();
+  const cookies = parseCookies(req.headers.cookie);
+  const token = cookies[AUTH_COOKIE_NAME];
+  if (token) {
+    const data = verifyAuthToken(token);
+    if (data && data.userId) {
+      if (!req.session) req.session = {};
+      req.session.userId = data.userId;
+    }
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ---------- PUBLIC ROUTES ----------
@@ -161,6 +235,8 @@ app.post('/api/auth/verify-otp', async (req, res) => {
   otpStore.delete(email.toLowerCase());
 
   req.session.userId = user.id;
+  req.session.cookie.maxAge = SESSION_MAX_AGE; // 30-day session window
+  attachAuthCookie(res, user.id);
   res.json({ id: user.id, name: user.name, email: user.email, isVerified: true });
 });
 
@@ -201,6 +277,9 @@ app.post('/api/auth/resend-otp', async (req, res) => {
 });
 
 
+// ---------- login OTP store (email → { otp, userId, name, expiresAt, attempts }) ----------
+const loginOtpStore = new Map();
+
 app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body;
   const data = db.load();
@@ -208,11 +287,102 @@ app.post('/api/auth/login', async (req, res) => {
   if (!user || !(await bcrypt.compare(password || '', user.passwordHash))) {
     return res.status(401).json({ error: 'Incorrect email or password.' });
   }
+
+  // Generate & email a login OTP
+  const otp = generateOtp();
+  loginOtpStore.set(user.email.toLowerCase(), {
+    otp,
+    userId: user.id,
+    name: user.name,
+    expiresAt: Date.now() + 10 * 60 * 1000,
+    attempts: 0
+  });
+
+  try {
+    await mailer.sendLoginOtpEmail(user.email, otp, user.name);
+  } catch (e) {
+    console.error('Login OTP email error:', e.message);
+  }
+
+  res.json({
+    ok: true,
+    email: user.email,
+    demo: !process.env.SYSTEM_SMTP_USER,
+    demoOtp: !process.env.SYSTEM_SMTP_USER ? otp : undefined
+  });
+});
+
+// STEP 2: Verify login OTP and establish session
+app.post('/api/auth/verify-login-otp', async (req, res) => {
+  const { email, otp } = req.body;
+  if (!email || !otp) return res.status(400).json({ error: 'Email and OTP are required.' });
+
+  const entry = loginOtpStore.get(email.toLowerCase());
+  if (!entry) return res.status(400).json({ error: 'No pending login for this email. Please log in again.' });
+  if (Date.now() > entry.expiresAt) {
+    loginOtpStore.delete(email.toLowerCase());
+    return res.status(400).json({ error: 'Login code has expired. Please log in again.' });
+  }
+
+  entry.attempts = (entry.attempts || 0) + 1;
+  if (entry.attempts > 5) {
+    loginOtpStore.delete(email.toLowerCase());
+    return res.status(429).json({ error: 'Too many incorrect attempts. Please log in again.' });
+  }
+
+  if (String(otp).trim() !== String(entry.otp)) {
+    const remaining = 5 - entry.attempts;
+    return res.status(400).json({ error: `Incorrect code. ${remaining} attempt${remaining !== 1 ? 's' : ''} remaining.` });
+  }
+
+  // OTP correct — establish session
+  loginOtpStore.delete(email.toLowerCase());
+  const data = db.load();
+  const user = data.users.find(u => u.id === entry.userId);
+  if (!user) return res.status(404).json({ error: 'User not found.' });
+
   req.session.userId = user.id;
+  req.session.cookie.maxAge = SESSION_MAX_AGE; // 30-day session window
+  attachAuthCookie(res, user.id);
   res.json({ id: user.id, name: user.name, email: user.email, isVerified: user.isVerified || false });
 });
 
+// RESEND login OTP
+app.post('/api/auth/resend-login-otp', async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: 'Email is required.' });
+
+  const entry = loginOtpStore.get(email.toLowerCase());
+  if (!entry) return res.status(400).json({ error: 'No pending login. Please log in again.' });
+
+  const sentAt = entry.expiresAt - 10 * 60 * 1000;
+  if (Date.now() - sentAt < 60 * 1000) {
+    const waitSec = Math.ceil(60 - (Date.now() - sentAt) / 1000);
+    return res.status(429).json({ error: `Please wait ${waitSec}s before resending.` });
+  }
+
+  const newOtp = generateOtp();
+  entry.otp = newOtp;
+  entry.expiresAt = Date.now() + 10 * 60 * 1000;
+  entry.attempts = 0;
+  loginOtpStore.set(email.toLowerCase(), entry);
+
+  try {
+    await mailer.sendLoginOtpEmail(email, newOtp, entry.name);
+  } catch (e) {
+    console.error('Resend login OTP error:', e.message);
+  }
+
+  res.json({
+    ok: true,
+    demo: !process.env.SYSTEM_SMTP_USER,
+    demoOtp: !process.env.SYSTEM_SMTP_USER ? newOtp : undefined
+  });
+});
+
+
 app.post('/api/auth/logout', (req, res) => {
+  removeAuthCookie(res);
   req.session.destroy(() => res.json({ ok: true }));
 });
 

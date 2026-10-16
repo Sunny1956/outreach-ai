@@ -137,3 +137,5 @@ backend/alembic/versions/*.py
 
 # --- Uploads ---
 backend/uploads/
+
+.vercel
